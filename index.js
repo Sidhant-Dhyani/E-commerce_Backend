@@ -10,7 +10,7 @@ const productsRoute = require("./routes/products");
 const checkoutRoute = require("./routes/checkout.js");
 // const adminRoute = require("./routes/admin.js");
 // const salesRoute = require("./routes/sales.js");
-// const adminAuthRoute = require("./routes/adminAuth.js");
+const adminAuthRoute = require("./routes/adminAuth.js");
 
 const port = 4000;
 const atlas =
@@ -31,7 +31,7 @@ app.use("/api/products", productsRoute);
 app.use("/api/checkout", checkoutRoute);
 // app.use("/api/admin", adminRoute);
 // app.use("/api/sales", salesRoute);
-// app.use("/api/adminAuth", adminAuthRoute);
+app.use("/api/adminAuth", adminAuthRoute);
 
 app.get("/", (req, res) => {
   res.send("Hello, world!");
