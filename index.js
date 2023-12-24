@@ -8,9 +8,9 @@ const User = require("./models/Users");
 const authRoute = require("./routes/auth");
 const productsRoute = require("./routes/products");
 const checkoutRoute = require("./routes/checkout.js");
-const adminRoute = require("./routes/admin.js");
-const salesRoute = require("./routes/sales.js");
-const adminAuthRoute = require("./routes/adminAuth.js");
+// const adminRoute = require("./routes/admin.js");
+// const salesRoute = require("./routes/sales.js");
+// const adminAuthRoute = require("./routes/adminAuth.js");
 
 const port = 4000;
 const atlas =
@@ -29,9 +29,9 @@ connectToDB();
 app.use("/api/auth", authRoute);
 app.use("/api/products", productsRoute);
 app.use("/api/checkout", checkoutRoute);
-app.use("/api/admin", adminRoute);
-app.use("/api/sales", salesRoute);
-app.use("/api/adminAuth", adminAuthRoute);
+// app.use("/api/admin", adminRoute);
+// app.use("/api/sales", salesRoute);
+// app.use("/api/adminAuth", adminAuthRoute);
 
 app.get("/", (req, res) => {
   res.send("Hello, world!");
