@@ -7,7 +7,6 @@ const getAllSales = async (req, res) => {
         const mappedOrders = [];
         for (let order of orders) {
             const products = [];
-            console.log('three');
             for (let product of order.products) {
                 const productDetails = await ProductsModel.findById(product._id);
                 if (productDetails) {
@@ -66,10 +65,14 @@ const getYesterdaySales = async (req, res) => {
 
             for (let product of order.products) {
                 const productDetails = await ProductsModel.findById(product._id);
-                products.push({
-                    name: productDetails.title,
-                    qty: product.qty
-                });
+                if (productDetails) {
+                    products.push({
+                        name: productDetails.title,
+                        qty: product.qty
+                    });
+                } else {
+                    console.error(`Product details not found for product ID: ${product._id}`);
+                }
             }
 
             mappedOrders.push({
@@ -114,10 +117,14 @@ const getLastWeekSales = async (req, res) => {
 
             for (let product of order.products) {
                 const productDetails = await ProductsModel.findById(product._id);
-                products.push({
-                    name: productDetails.title,
-                    qty: product.qty
-                });
+                if (productDetails) {
+                    products.push({
+                        name: productDetails.title,
+                        qty: product.qty
+                    });
+                } else {
+                    console.error(`Product details not found for product ID: ${product._id}`);
+                }
             }
 
             mappedOrders.push({
@@ -160,10 +167,14 @@ const getLastMonthSales = async (req, res) => {
 
             for (let product of order.products) {
                 const productDetails = await ProductsModel.findById(product._id);
-                products.push({
-                    name: productDetails.title,
-                    qty: product.qty
-                });
+                if (productDetails) {
+                    products.push({
+                        name: productDetails.title,
+                        qty: product.qty
+                    });
+                } else {
+                    console.error(`Product details not found for product ID: ${product._id}`);
+                }
             }
 
             mappedOrders.push({
