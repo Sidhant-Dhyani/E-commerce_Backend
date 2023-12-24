@@ -2,24 +2,28 @@ const Orders = require('../models/Orders');
 const ProductsModel = require("../models/Products");
 const getAllSales = async (req, res) => {
     try {
-        const orders = await Orders.find({});
+        const orders = await Orders.find({
+        });
         const mappedOrders = [];
-
         for (let order of orders) {
             const products = [];
-
+            console.log('three');
             for (let product of order.products) {
                 const productDetails = await ProductsModel.findById(product._id);
-                products.push({
-                    name: productDetails.title,
-                    qty: product.qty
-                });
+                if (productDetails) {
+                    products.push({
+                        name: productDetails.title,
+                        qty: product.qty
+                    });
+                } else {
+                    console.error(`Product details not found for product ID: ${product._id}`);
+                }
             }
 
             mappedOrders.push({
                 name: order.name,
                 address: order.address,
-                city: order.state,
+                city: order.city,
                 state: order.state,
                 postal_code: order.postal_code,
                 contact_phone: order.contact_phone,
@@ -30,7 +34,9 @@ const getAllSales = async (req, res) => {
 
         res.status(200).json(mappedOrders);
     } catch (error) {
+        console.error(`Error in getAllSales: ${error.message}`);
         res.status(500).json({
+            status: 'error',
             message: error.message
         });
     }
@@ -69,7 +75,7 @@ const getYesterdaySales = async (req, res) => {
             mappedOrders.push({
                 name: order.name,
                 address: order.address,
-                city: order.state,
+                city: order.city,
                 state: order.state,
                 postal_code: order.postal_code,
                 contact_phone: order.contact_phone,
@@ -117,7 +123,7 @@ const getLastWeekSales = async (req, res) => {
             mappedOrders.push({
                 name: order.name,
                 address: order.address,
-                city: order.state,
+                city: order.city,
                 state: order.state,
                 postal_code: order.postal_code,
                 contact_phone: order.contact_phone,
@@ -163,7 +169,7 @@ const getLastMonthSales = async (req, res) => {
             mappedOrders.push({
                 name: order.name,
                 address: order.address,
-                city: order.state,
+                city: order.city,
                 state: order.state,
                 postal_code: order.postal_code,
                 contact_phone: order.contact_phone,
