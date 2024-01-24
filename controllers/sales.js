@@ -8,14 +8,14 @@ const getAllSales = async (req, res) => {
         for (let order of orders) {
             const products = [];
             for (let product of order.products) {
-                const productDetails = await ProductsModel.findById(product._id);
+                const productDetails = await ProductsModel.findById(product.product);
                 if (productDetails) {
                     products.push({
                         name: productDetails.title,
                         qty: product.qty
                     });
                 } else {
-                    console.error(`Product details not found for product ID: ${product._id}`);
+                    console.error(`Product details not found for product ID: ${product.product}`);
                 }
             }
 
@@ -64,14 +64,14 @@ const getYesterdaySales = async (req, res) => {
             const products = [];
 
             for (let product of order.products) {
-                const productDetails = await ProductsModel.findById(product._id);
+                const productDetails = await ProductsModel.findById(product.product);
                 if (productDetails) {
                     products.push({
                         name: productDetails.title,
                         qty: product.qty
                     });
                 } else {
-                    console.error(`Product details not found for product ID: ${product._id}`);
+                    console.error(`Product details not found for product ID: ${product.product}`);
                 }
             }
 
@@ -116,14 +116,14 @@ const getLastWeekSales = async (req, res) => {
             const products = [];
 
             for (let product of order.products) {
-                const productDetails = await ProductsModel.findById(product._id);
+                const productDetails = await ProductsModel.findById(product.product);
                 if (productDetails) {
                     products.push({
                         name: productDetails.title,
                         qty: product.qty
                     });
                 } else {
-                    console.error(`Product details not found for product ID: ${product._id}`);
+                    console.error(`Product details not found for product ID: ${product.product}`);
                 }
             }
 
@@ -166,14 +166,14 @@ const getLastMonthSales = async (req, res) => {
             const products = [];
 
             for (let product of order.products) {
-                const productDetails = await ProductsModel.findById(product._id);
+                const productDetails = await ProductsModel.findById(product.product);
                 if (productDetails) {
                     products.push({
                         name: productDetails.title,
                         qty: product.qty
                     });
                 } else {
-                    console.error(`Product details not found for product ID: ${product._id}`);
+                    console.error(`Product details not found for product ID: ${product.product}`);
                 }
             }
 

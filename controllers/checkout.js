@@ -24,6 +24,8 @@ const order = async (req, res) => {
       contact_phone,
     });
     const savedOrder = await newOrder.save();
+    console.log(products);
+    console.log(savedOrder);
     res.status(200).json(savedOrder);
   } catch (error) {
     console.error(error);
