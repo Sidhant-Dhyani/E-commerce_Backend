@@ -1,4 +1,5 @@
 const OrderModel = require("../models/Orders");
+const ProductsModel = require("../models/Products");
 const order = async (req, res) => {
   try {
     const {
@@ -24,8 +25,13 @@ const order = async (req, res) => {
       contact_phone,
     });
     const savedOrder = await newOrder.save();
-    console.log(products);
-    console.log(savedOrder);
+    for (let product of products) {
+      const productDetails = await ProductsModel.findById(product.product);
+      if (productDetails) {
+        productDetails.stock -= product.qty;
+        const newProduct = await productDetails.save();
+      }
+    }
     res.status(200).json(savedOrder);
   } catch (error) {
     console.error(error);
