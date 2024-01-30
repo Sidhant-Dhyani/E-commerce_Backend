@@ -38,8 +38,33 @@ const getSortedProducts = async (req, res) => {
     console.log("Hello World!!");
 };
 
-const getSearchedProducts = async () => { 
-
+const getSearchedProducts = async (req, res) => {
+    const keyword = req.query.keywords;
+    try {
+        const products = await ProductsModel.aggregate([
+            {
+                $match: {
+                    $or: [
+                        {
+                            title: {
+                                $regex: keyword,
+                                $options: "i",
+                            },
+                        },
+                        {
+                            description: {
+                                $regex: keyword,
+                                $options: "i",
+                            },
+                        },
+                    ],
+                },
+            },
+        ]);
+        res.status(200).json(products);
+    } catch (error) {
+        res.status(500).json(error.message);
+    }
 }
 
 module.exports = { getFilteredProducts, getSortedProducts, getSearchedProducts };
