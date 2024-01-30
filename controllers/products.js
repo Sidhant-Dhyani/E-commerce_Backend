@@ -38,4 +38,8 @@ const getSortedProducts = async (req, res) => {
     console.log("Hello World!!");
 };
 
-module.exports = { getFilteredProducts, getSortedProducts };
+const getSearchedProducts = async () => { 
+
+}
+
+module.exports = { getFilteredProducts, getSortedProducts, getSearchedProducts };
